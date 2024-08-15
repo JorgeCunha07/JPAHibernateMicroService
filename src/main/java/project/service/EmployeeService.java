@@ -9,7 +9,6 @@ import project.entity.Department;
 import project.repository.DepartmentRepository;
 import project.repository.EmployeeRepository;
 import project.entity.Employee;
-import java.nio.file.AccessDeniedException;
 import java.util.List;
 
 @Service
@@ -21,7 +20,7 @@ public class EmployeeService {
     @Autowired
     private DepartmentRepository departmentRepository;
 
-    public Employee updateEmployee(Long id, Employee updatedEmployee) throws AccessDeniedException {
+    public Employee updateEmployee(Long id, Employee updatedEmployee) {
         Employee employee = employeeRepository.findById(id).orElseThrow(() ->
                 new ResponseStatusException(HttpStatusCode.valueOf(401), "Employee not found")
         );
