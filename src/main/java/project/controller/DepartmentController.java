@@ -11,8 +11,12 @@ import project.service.DepartmentService;
 @RequestMapping("/departments")
 public class DepartmentController {
 
+    private final DepartmentService departmentService;
+
     @Autowired
-    private DepartmentService departmentService;
+    public DepartmentController(DepartmentService departmentService) {
+        this.departmentService = departmentService;
+    }
 
     @PostMapping
     public ResponseEntity<Department> createDepartment(@RequestBody Department department) {
@@ -21,14 +25,14 @@ public class DepartmentController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Department> createDepartment(@PathVariable Long id, @RequestBody Department department) {
+    public ResponseEntity<Department> updateDepartment(@PathVariable Long id, @RequestBody Department department) {
         Department updatedDepartment = departmentService.updateDepartment(id, department);
         return new ResponseEntity<>(updatedDepartment, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Department> deleteDepartment(@PathVariable Long id) {
-        Department deletedDepartment = departmentService.deleteDepartment(id);
-        return new ResponseEntity<>(deletedDepartment, HttpStatus.OK);
+    public ResponseEntity<Void> deleteDepartment(@PathVariable Long id) {
+        departmentService.deleteDepartment(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
