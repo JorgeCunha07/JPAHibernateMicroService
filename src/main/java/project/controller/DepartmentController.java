@@ -19,4 +19,16 @@ public class DepartmentController {
         Department createdDepartment = departmentService.createDepartment(department);
         return new ResponseEntity<>(createdDepartment, HttpStatus.CREATED);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Department> createDepartment(@PathVariable Long id, @RequestBody Department department) {
+        Department updatedDepartment = departmentService.updateDepartment(id, department);
+        return new ResponseEntity<>(updatedDepartment, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Department> deleteDepartment(@PathVariable Long id) {
+        Department deletedDepartment = departmentService.deleteDepartment(id);
+        return new ResponseEntity<>(deletedDepartment, HttpStatus.OK);
+    }
 }
